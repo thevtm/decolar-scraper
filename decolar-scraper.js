@@ -137,6 +137,22 @@ function mineDecolarData (DecolarDataJSON) {
 exports.mineDecolarData = mineDecolarData;
 
 /**
+  * Cria nova exceção FaileToParseDecolarData.
+  * @class Exceção não é possivel analisar dados recebidos da Decolar.
+  * @param {String} message Mensagem do erro.
+  * @return {FaileToParseDecolarData}
+  */
+function FaileToParseDecolarData(data, error) {
+  this.name = 'FaileToParseDecolarData';
+  this.message = 'Não foi possivel analisar os dados recebidos da Decolar.';
+  this.data = data;
+  this.error = error;
+}
+FaileToParseDecolarData.prototype = Object.create(Error.prototype);
+FaileToParseDecolarData.prototype.constructor = FaileToParseDecolarData;
+exports.FaileToParseDecolarData = FaileToParseDecolarData;
+
+/**
   * Scrape passagem da decolar a partir da URL fornecida e retorna menor preço.
   * @param {String} DecolarURL URL da passagem da Decolar.
   * @return {Objeto} Objeto contendo menor preço.
@@ -151,7 +167,7 @@ function scrape (DecolarURL) {
         deferred.resolve(JSON.parse(data));
       } catch (err) {
         err.DecolarData = data;
-        deferred.reject(err);
+        deferred.reject(new FaileToParseDecolarData(data, err));
       }
 
       return deferred.promise;
