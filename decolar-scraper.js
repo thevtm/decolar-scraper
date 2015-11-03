@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+"use strict";
+
 var url = require('url');
 var R = require('ramda');
 var Q = require('q');
@@ -27,7 +31,6 @@ exports.URLDecolarInvalidaError = URLDecolarInvalidaError;
   * @return {String} URL dos dados da passagem.
   */
 function getDecolarDataURL (DecolarURL) {
-  "use strict";
 
   // Converte para URL lower case
   DecolarURL = DecolarURL.toLowerCase();
@@ -175,3 +178,70 @@ function scrape (DecolarURL) {
     .then(mineDecolarData);
 }
 exports.scrape = scrape;
+
+
+/**** Command Line Interface ****/
+let pkg = require(__dirname + '/package.json');
+let program = require("commander");
+
+program
+  .version(pkg.version)
+
+// scrape
+program 
+  .command("scrape <url>")
+  .description("scrape informações da passagem")
+  .action(urlDecolar => {
+    scrape(urlDecolar)
+      .done(data => {
+        console.log(JSON.stringify(data));
+      },
+      error => { console.error(error); });
+  })
+
+// alarme
+const INTERVALO_PADRAO = 90000;
+const INTERVALO_MIN = 10000;
+function setIntervalFirst(fun, delay) {
+  fun();
+  return setInterval(fun, delay);
+}
+
+program
+  .option('-i, --intervalo <n>', "define o intervalo que o alarme obtera novos dados da Decolar em milisegundos (Padrao: "+INTERVALO_PADRAO+")", parseInt)
+  .command('alarme <url>')
+  .description("alerta quando o preço da passagem mudar")
+  .action(urlDecolar => {
+    let preco = undefined;
+    let intervalo = Math.max(program.intervalo || INTERVALO_PADRAO, INTERVALO_MIN);
+
+    console.log("Decolar Scraper Alarme Iniciado\n\
+    Preco sera atualizado a cada %d milisegundos.\n",
+     intervalo)
+
+    let intervalID = setIntervalFirst(() => {
+      scrape(urlDecolar)
+        .done(data => {
+          let novoPreco = data.MenorPreco[0].formatted;
+          let beep = "";
+          let now = new Date();
+          
+          if(preco === undefined) {
+            preco = novoPreco;
+          } else if(novoPreco.amount !== preco.amount) {
+            beep = "\tBEEP\u0007";
+            preco = novoPreco;
+          }
+
+          console.log("[%d/%d/%d - %d:%d:%d]\t%s %d" + beep,
+              now.getFullYear(), now.getMonth(), now.getDay(), now.getHours(),
+              now.getMinutes(), now.getSeconds(), novoPreco.mask, novoPreco.amount);
+        }, console.error);
+
+    }, intervalo);
+  })
+
+program.parse(process.argv);
+
+
+

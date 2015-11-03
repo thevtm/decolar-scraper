@@ -13,11 +13,16 @@
   "dependencies": {
     "chai": "*",
     "chai-as-promised": "*",
-    "ramda": "*",
+    "commander": "^2.9.0",
     "q": "*",
+    "ramda": "*",
     "request": "*",
     "valid-url": "*"
   },
   "author": "Vinícius T. M.",
-  "license": "MIT"
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "decolar-scraper": "decolar-scraper.js"
+  }
 }
