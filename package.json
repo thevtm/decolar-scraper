@@ -14,6 +14,7 @@
     "chai": "*",
     "chai-as-promised": "*",
     "commander": "^2.9.0",
+    "lodash": "^4.0.0",
     "q": "*",
     "ramda": "*",
     "request": "*",
@@ -23,6 +24,12 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "decolar-scraper": "decolar-scraper.js"
+    "decolar-scraper": "./bin/CLI.js"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    }
   }
 }
