@@ -13,7 +13,7 @@ const INTERVALO_MIN = 10000;
 /*** CLI Definition ***/
 program
   .version(pkg.version)
-  .usage('[options] <urls ...>')
+  .usage('[options] <url>')
   .option('-i, --intervalo <n>', "define o intervalo que o alarme obtera novos dados da Decolar em milisegundos (Padrao: "+INTERVALO_PADRAO+"ms)", parseInt)
   .option('-a, --alarme', 'apita quando um preço menor é recebido');
 program.parse(process.argv);
@@ -31,27 +31,25 @@ console.log("Decolar Scraper Iniciado\n\
   Preco sera atualizado a cada %d milisegundos.\n",
   intervalo);
 
-console.log("ARGV", program.args);
-
 let urlDecolar = R.head(program.args);
 
 let intervalID = setIntervalFirst(() => {
   decolar_scraper.scrape(urlDecolar)
     .done(data => {
-      let novoPreco = data.MenorPreco[0].formatted;
+      let menorPreco = data.MenorPreco;
+      let novoPreco = menorPreco.emissionPrice.baseFare;
       let beep = "";
       let now = new Date();
 
       if(preco === undefined) {
         preco = novoPreco;
-      } else if(novoPreco.amount !== preco.amount) {
+      } else if(novoPreco.raw !== preco.raw) {
         beep = "\tBEEP\u0007";
         preco = novoPreco;
       }
 
-      console.log("[%d/%d/%d - %d:%d:%d]\t%s %d" + beep,
-          now.getFullYear(), now.getMonth(), now.getDay(), now.getHours(),
-          now.getMinutes(), now.getSeconds(), novoPreco.mask, novoPreco.amount);
+      console.log("[" + now.toLocaleString() + "]\t%s %d - %d assentos restantes" + beep,
+        novoPreco.formatted.mask, novoPreco.formatted.amount, menorPreco.seatsRemaining);
     }, console.error);
 
 }, intervalo);
