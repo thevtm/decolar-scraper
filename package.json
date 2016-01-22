@@ -2,7 +2,7 @@
   "name": "decolar-scraper",
   "version": "0.1.1",
   "description": "Scrape voos Decolar",
-  "main": "DecolarScraper.js",
+  "main": "lib/decolar-scraper.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/thevtm/decolar-scraper.git"
