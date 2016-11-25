@@ -19,7 +19,7 @@ export interface DecolarFare {
 
 export interface DecolarData {
   result: {
-    data: {
+    data?: {
       items: [Object]
       cities: Object,
       airports: Object,
@@ -62,13 +62,19 @@ export interface DecolarData {
       hiddenFlightsCount: number,
       promotionsCount: number
     },
-    htmlContent: {
+    htmlContent?: {
       "flights-alerts": string,
       "flights-alerts-fixed": string
     },
     status: {
-      code: string
+      code: string,
+      message?: string
     }
-  }
+  },
+  messages?: [{
+    code: string,
+    value: string,
+    description: string
+  }]
 }
 
