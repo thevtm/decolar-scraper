@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./dist",
     "target": "es5",
     "module": "commonjs",
+    "declaration": true,
+    "declarationDir": "./types",
     "noImplicitAny": true,
     "strictNullChecks": true,
     "sourceMap": true,
