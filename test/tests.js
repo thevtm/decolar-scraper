@@ -49,6 +49,13 @@ describe('DecolarScraper', function () {
 
       DecolarScraper.getDecolarDataURL(DECOLAR_URL).should.be.equal(DECOLAR_DATA_URL.toLowerCase())
     })
+
+    it('Deve retornar a url de dados correta 2.', function () {
+      const DECOLAR_URL = "http://www.decolar.com/shop/flights/results/oneway/POA/SAO/2016-12-17/1/0/0?from=SB"
+      const DECOLAR_DATA_URL = "http://www.decolar.com/shop/flights/data/search/oneway/poa/sao/2016-12-17/1/0/0/FARE/ASCENDING/NA/NA/NA/NA"
+
+      DecolarScraper.getDecolarDataURL(DECOLAR_URL).should.be.equal(DECOLAR_DATA_URL.toLowerCase())
+    })
   })
 
 })

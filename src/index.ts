@@ -47,17 +47,21 @@ export function getDecolarDataURL (DecolarURL: string): string {
     throw new URLDecolarInvalidaError('Host invalido.', DecolarURL)
   }
 
-  // 6. Obtem path dos dados
+  // 6. Remove a query da URL
+  delete urlParsed.search
+  delete urlParsed.query
+
+  // 7. Obtem path dos dados
   var URLPathPrefix = '/shop/flights/data/search'
-  var URLPathSlice  = urlParsed.path!.slice(21)
+  var URLPathSlice  = urlParsed.pathname!.slice(21)
   var URLPathSufix  = '/fare/ascending/na/na/na/na'
   var URLPathFinal  = URLPathPrefix + URLPathSlice + URLPathSufix
 
-  // 7. Cria url final
+  // 8. Cria url final
   urlParsed.pathname = URLPathFinal
   DecolarURL = url.format(urlParsed)
 
-  // 8. Verifica se a URL final é valida
+  // 9. Verifica se a URL final é valida
   if(validURL.isWebUri(DecolarURL) === undefined) {
     throw new URLDecolarInvalidaError('URL final invalida.', DecolarURL)
   }

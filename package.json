@@ -10,6 +10,7 @@
   },
   "scripts": {
     "test": "mocha",
+    "test-watch": "mocha -w",
     "build": "tsc"
   },
   "dependencies": {
