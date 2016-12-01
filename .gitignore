@@ -2,7 +2,7 @@
 .vscode
 
 # Typescript
-*.map
+#*.map
 
 # Logs
 logs
