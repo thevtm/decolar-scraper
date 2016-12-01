@@ -9,7 +9,8 @@ import { DecolarData } from './decolar-data'
 
 /* LIBS EXPORTS */
 export { URLDecolarInvalidaError, RequestStatusNotOKError } from './error'
-export { DecolarData, DecolarFare } from './decolar-data'
+export { DecolarData, DecolarFare, DecolarLocation, DecolarItinerariesBox,
+  DecolarItem } from './decolar-data'
 
 /* EXEC */
 

@@ -1,5 +1,5 @@
 export { URLDecolarInvalidaError, RequestStatusNotOKError } from './error';
-export { DecolarData, DecolarFare } from './decolar-data';
+export { DecolarData, DecolarFare, DecolarLocation, DecolarItinerariesBox, DecolarItem } from './decolar-data';
 /**
   * Retorna URL contendo os dados da passagem a partir da URL fornecida.
   * @param {string} DecolarURL ULR da passagem da Decolar.

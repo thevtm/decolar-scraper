@@ -17,10 +17,48 @@ export interface DecolarFare {
   }
 }
 
+export interface DecolarLocation {
+  city: {
+    code: string
+  },
+  airport: {
+    code: string
+  },
+  takeAsCity: boolean,
+  code: string
+}
+
+export interface DecolarItinerariesBox {
+  outboundLocations: {
+    departure: DecolarLocation,
+    arrival: DecolarLocation
+  }
+}
+
+export interface DecolarItem {
+  internalId: string,
+  clusterAlertType: string,
+  id: string,
+  itinerariesBox: DecolarItinerariesBox,
+  emissionPrice: {
+    total: {
+      fare: {
+        raw: number,
+        formatted: {
+          code: string,
+          amount: string,
+          mask: string
+        }
+      }
+    }
+  },
+  provider: string
+}
+
 export interface DecolarData {
   result: {
     data?: {
-      items: [Object]
+      items: [DecolarItem]
       cities: Object,
       airports: Object,
       airline: Object,
