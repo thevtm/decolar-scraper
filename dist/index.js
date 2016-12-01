@@ -1,7 +1,6 @@
 'use strict';
 /* LIBS */
 var url = require('url');
-var rp = require('request-promise-native');
 var validURL = require('valid-url');
 var error_1 = require('./error');
 /* LIBS EXPORTS */
@@ -52,22 +51,4 @@ function getDecolarDataURL(DecolarURL) {
     return DecolarURL;
 }
 exports.getDecolarDataURL = getDecolarDataURL;
-/**
-  * Scrape as passagem da decolar a partir da URL.
-  * @param {String} DecolarURL URL da passagem da Decolar.
-  * @return {Promise<DecolarData>} Objeto contendo menor preço.
-  */
-function scrape(DecolarURL) {
-    // 1. Obtem URL dos dados
-    var DecolarDataURL = getDecolarDataURL(DecolarURL);
-    // 2. Requisita os dados e retorna os mesmos
-    return rp({
-        uri: DecolarDataURL,
-        json: true
-    })
-        .then(function (data) {
-        return data;
-    });
-}
-exports.scrape = scrape;
 //# sourceMappingURL=index.js.map

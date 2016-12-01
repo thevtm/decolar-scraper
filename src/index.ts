@@ -2,7 +2,6 @@
 
 /* LIBS */
 import * as url from 'url'
-import * as rp from 'request-promise-native'
 import * as validURL from 'valid-url'
 
 import { URLDecolarInvalidaError, RequestStatusNotOKError } from './error'
@@ -67,23 +66,4 @@ export function getDecolarDataURL (DecolarURL: string): string {
   }
 
   return DecolarURL
-}
-
-/**
-  * Scrape as passagem da decolar a partir da URL.
-  * @param {String} DecolarURL URL da passagem da Decolar.
-  * @return {Promise<DecolarData>} Objeto contendo menor preço.
-  */
-export function scrape (DecolarURL: string): Promise<DecolarData> {
-  // 1. Obtem URL dos dados
-  const DecolarDataURL = getDecolarDataURL(DecolarURL)
-
-  // 2. Requisita os dados e retorna os mesmos
-  return rp({
-    uri: DecolarDataURL,
-    json: true
-  })
-    .then(data => {
-      return data as DecolarData
-    })
 }

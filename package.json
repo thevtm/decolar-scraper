@@ -1,6 +1,6 @@
 {
   "name": "decolar-scraper",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Scrape voos Decolar",
   "main": "./dist/index.js",
   "types": "./types/index.d.ts",
@@ -14,17 +14,12 @@
     "build": "tsc"
   },
   "dependencies": {
-    "request": "^2.79.0",
-    "request-promise-native": "^1.0.3",
     "valid-url": "^1.0.9"
   },
   "author": "Vinícius Tabille Manjabosco",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^6.0.51",
-    "@types/ramda": "^0.0.2",
-    "@types/request": "^0.0.34",
-    "@types/request-promise-native": "^1.0.2",
     "@types/valid-url": "^1.0.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
