@@ -1,6 +1,6 @@
 {
   "name": "decolar-scraper",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Scrape voos Decolar",
   "main": "./dist/index.js",
   "types": "./types/index.d.ts",

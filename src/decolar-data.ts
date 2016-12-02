@@ -61,7 +61,7 @@ export interface DecolarData {
       items: [DecolarItem]
       cities: Object,
       airports: Object,
-      airline: Object,
+      airlines: Object,
       cabinTypes: Object,
       refinementSummary: Object,
       paginationSummary: {
